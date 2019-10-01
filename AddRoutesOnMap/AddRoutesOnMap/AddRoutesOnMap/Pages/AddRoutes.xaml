@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:custom="clr-namespace:AddRoutesOnMap.PlacesSearchBar"
+             x:Class="AddRoutesOnMap.Pages.AddRoutes"
+             xmlns:local="clr-namespace:AddRoutesOnMap.CustomControls">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+           
+            <!--Search Bar-->
+            <Grid Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#FFFFFF">
+                <custom:PlacesBar x:Name="search_bar"/>
+            </Grid>
+
+            <!--Map-->
+            <Grid Grid.Row="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <!--Map-->
+                <Grid Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <local:CustomMap x:Name="MyMap" IsShowingUser="True"/>
+                </Grid>
+            </Grid>
+            <!--Place List-->
+            <Grid Grid.Row="2" x:Name="placeListGrid" HorizontalOptions="FillAndExpand" IsVisible="False" BackgroundColor="White" VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <AbsoluteLayout>
+                        <ActivityIndicator x:Name="spinner" IsRunning="false"
+				                                       AbsoluteLayout.LayoutBounds="0.5, 0.1, 50, 50"  
+                                                       AbsoluteLayout.LayoutFlags="PositionProportional" />
+                        <ListView x:Name="results_list" IsVisible="false"
+				                              AbsoluteLayout.LayoutBounds="0, 0, 1, 1" 
+                                              AbsoluteLayout.LayoutFlags="SizeProportional" >
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextCell Text="{Binding Description}"  />
+                                    <!--Detail="{Binding Place_ID}"-->
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </AbsoluteLayout>
+                </Grid>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
